@@ -101,6 +101,10 @@ class synchronize_observer : public detail::multicast_observer<T>
         {
         }
 
+        ~synchronize_observer_state()
+        {   coordinator.get_worker().unsubscribe();
+        }
+
         template<class V>
         void on_next(V v) const {
             if (lifetime.is_subscribed()) {
